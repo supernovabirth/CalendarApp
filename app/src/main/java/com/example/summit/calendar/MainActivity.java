@@ -78,7 +78,9 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_Event:
                 startActivity(new Intent(this, Events.class));
                 break;
-
+            case R.id.action_WeeklyView:
+                startActivity(new Intent(this, EventsWeekView.class));
+                break;
         }
 
         return super.onOptionsItemSelected(item);

@@ -4,11 +4,15 @@
     tools:context="com.example.summit.calendar.MainActivity">
 
 
-    <item android:id="@+id/action_Event"
+    <item android:id="@+id/action_WeeklyView"
         android:orderInCategory="200"
-        android:title="Events"
+        android:title="@string/weekly_view"
         app:showAsAction="always" />
 
+    <item android:id="@+id/action_Event"
+        android:orderInCategory="200"
+        android:title="@string/list_view"
+        app:showAsAction="always" />
 
     <item android:id="@+id/action_add"
         android:orderInCategory="200"

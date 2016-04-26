@@ -28,9 +28,16 @@
         <activity
             android:name=".Events"
             android:label="@string/title_activity_display_events" />
+
         <activity
             android:name=".DisplayEvents"
-            android:label="@string/title_activity_display_events"></activity>
+            android:label="@string/title_activity_display_events">
+
+        </activity>
+        <activity
+            android:name=".EventsWeekView"
+            android:label="@string/title_activity_week_view" />
+
     </application>
 
 </manifest>
