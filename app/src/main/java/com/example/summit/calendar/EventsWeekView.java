@@ -8,6 +8,7 @@ import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 /**
  * Created by Pradipta on 4/25/2016.
@@ -21,19 +22,19 @@ public class EventsWeekView extends ActionBarActivity implements com.alamkanak.w
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_view);
-        boolean check=checkDataBase();
+        //boolean check=checkDataBase();
         // Get a reference for the week view in the layout.
         mWeekView = (WeekView) findViewById(R.id.weekView);
 
         // Set an action when any event is clicked.
-        mWeekView.setOnEventClickListener(mEventClickListener);
+        //mWeekView.setOnEventClickListener(mEventClickListener);
 
         // The week view has infinite scrolling horizontally. We have to provide the events of a
         // month every time the month changes on the week view.
         mWeekView.setMonthChangeListener(mMonthChangeListener);
 
         // Set long press listener for events.
-        mWeekView.setEventLongPressListener(mEventLongPressListener);
+        //mWeekView.setEventLongPressListener(mEventLongPressListener);
     }
 
     private boolean checkDataBase() {
@@ -61,5 +62,29 @@ public class EventsWeekView extends ActionBarActivity implements com.alamkanak.w
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
 
     }
+
+    private List<WeekViewEvent> getEventsForMonth(int year, int month) {
+        List<WeekViewEvent> tempList = new ArrayList<WeekViewEvent>();
+        WeekViewEvent[] events = new WeekViewEvent[1];
+        events[0]= new WeekViewEvent(101, "event1",2016, 04, 25, 10, 10, 2016, 04, 25, 11, 10);
+        for (WeekViewEvent weekViewEvent : events) {
+            if (weekViewEvent.getStartTime().get(Calendar.MONTH) == month && weekViewEvent.getStartTime().get(Calendar.YEAR) ==
+                    year) {
+                tempList.add(weekViewEvent);
+            }
+        }
+
+        return tempList;
+    }
+
+    WeekView.MonthChangeListener mMonthChangeListener = new WeekView.MonthChangeListener() {
+        @Override
+        public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+            // Populate the week view with some events.
+            List<WeekViewEvent> events = getEventsForMonth(newYear, newMonth);
+            //List<WeekViewEvent> events = null; //remove this
+            return events;
+        }
+    };
 
 }
