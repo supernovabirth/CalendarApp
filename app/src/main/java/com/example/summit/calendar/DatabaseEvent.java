@@ -120,4 +120,40 @@ public class DatabaseEvent extends SQLiteOpenHelper {
     }
 
 
+    public Cursor getInfo(String query) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        int flag =0;
+        String []possibilities = {"event"};
+        for (int i =0;i<possibilities.length;i++)
+        {
+            if(query.equalsIgnoreCase(possibilities[i]))
+            {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1)
+        {
+            //String selection = "SELECT * FROM medication WHERE NAME = '" + query + "' ";
+            String selection = "SELECT * FROM "+TABLE_NAME;
+            cursor = db.rawQuery(selection, null);
+            return cursor;
+        }
+
+        String selection = "SELECT * FROM Event WHERE Title = '" + query + "' ";
+        cursor = db.rawQuery(selection,null);
+        return cursor;
+    }
+
+    public Cursor getInfoFromDate(String query)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        String [] array = query.split("-");
+        String selection = "SELECT * FROM Event WHERE Day = '" + array[1] + "' AND " + "Month = '"+array[0]+"' AND Year = '"+array[2]+"'";
+        cursor = db.rawQuery(selection,null);
+        return cursor;
+
+    }
 }

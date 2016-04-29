@@ -38,6 +38,9 @@
             android:name=".EventsWeekView"
             android:label="@string/title_activity_week_view" />
 
+		<activity
+            android:name=".Search"
+            android:label="@string/title_activity_search"></activity>
     </application>
 
 </manifest>
