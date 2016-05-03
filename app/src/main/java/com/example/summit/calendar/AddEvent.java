@@ -2,7 +2,7 @@ package com.example.summit.calendar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.sql.Time;
 import java.util.Date;
 
-public class AddEvent extends ActionBarActivity {
+public class AddEvent extends AppCompatActivity {
 
     String title;
     String location;

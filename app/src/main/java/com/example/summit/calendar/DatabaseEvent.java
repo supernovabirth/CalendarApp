@@ -14,16 +14,16 @@ public class DatabaseEvent extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Event.db";
     public static final String TABLE_NAME ="Event";
 
-    public static final String KEY_ROWID = "ID";
-    public static final String KEY_TITLE = "Title";
-    public static final String KEY_DAY= "Day";
-    public static final String KEY_MONTH ="Month";
-    public static final String KEY_YEAR = "Year";
-    public static final String KEY_HOUR = "Hour";
-    public static final String KEY_MINUTE = "Minute";
-    public static final String KEY_LOCATION = "Location";
-    public static final String KEY_DURATION = "Duration";
-    public static final String KEY_DESCRIPTION = "Description";
+    public static final String KEY_ROWID = "ID";//0
+    public static final String KEY_TITLE = "Title";//1
+    public static final String KEY_DAY= "Day";//2
+    public static final String KEY_MONTH ="Month";//3
+    public static final String KEY_YEAR = "Year";//4
+    public static final String KEY_HOUR = "Hour";//5
+    public static final String KEY_MINUTE = "Minute";//6
+    public static final String KEY_LOCATION = "Location";//7
+    public static final String KEY_DURATION = "Duration";//8
+    public static final String KEY_DESCRIPTION = "Description";//9
 
     public DatabaseEvent(Context context){
 
@@ -156,4 +156,5 @@ public class DatabaseEvent extends SQLiteOpenHelper {
         return cursor;
 
     }
+
 }
