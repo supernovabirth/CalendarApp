@@ -77,9 +77,9 @@ public class Search extends AppCompatActivity {
             buffer.append("Title: " + results.getString(1) + "\n");
             buffer.append("Date : " + results.getString(3) + "/" + results.getString(2) + "/" + results.getString(4) + "\n");
             buffer.append("Time : " + results.getString(5) + ":" + results.getString(6) + "\n");
-            buffer.append("Location:" + results.getString(7) + "\n");
-            buffer.append("Duration:" + results.getString(8) + "\n");
-            buffer.append("Description:" + results.getString(9) + "\n"+"\n");
+            buffer.append("Location:" + results.getString(9) + "\n");
+            //buffer.append("Duration:" + results.getString(8) + "\n");
+            buffer.append("Description:" + results.getString(10) + "\n"+"\n");
         }
 
         showMessage("Search Results ", buffer.toString());

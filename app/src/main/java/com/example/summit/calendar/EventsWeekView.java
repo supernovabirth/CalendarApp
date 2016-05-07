@@ -1,10 +1,12 @@
 package com.example.summit.calendar;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -83,7 +85,11 @@ public class EventsWeekView extends AppCompatActivity implements com.alamkanak.w
                     mWeekViewType = TYPE_DAY_VIEW;
                     mWeekView.setNumberOfVisibleDays(1);
 
-                    }
+                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
+                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+
+                }
                 return true;
             case R.id.action_three_day_view:
                 if (mWeekViewType != TYPE_THREE_DAY_VIEW) {
@@ -91,7 +97,10 @@ public class EventsWeekView extends AppCompatActivity implements com.alamkanak.w
                     mWeekViewType = TYPE_THREE_DAY_VIEW;
                     mWeekView.setNumberOfVisibleDays(3);
 
-                    }
+                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
+                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                }
                 return true;
             case R.id.action_week_view:
                 if (mWeekViewType != TYPE_WEEK_VIEW) {
@@ -99,7 +108,10 @@ public class EventsWeekView extends AppCompatActivity implements com.alamkanak.w
                     mWeekViewType = TYPE_WEEK_VIEW;
                     mWeekView.setNumberOfVisibleDays(7);
 
-                    }
+                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
+                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
+                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
+                }
                 return true;
         }
 
@@ -165,20 +177,22 @@ public class EventsWeekView extends AppCompatActivity implements com.alamkanak.w
                 startHour=Integer.parseInt(cursor.getString(5));
                 startMinute = Integer.parseInt(cursor.getString(6));
 
-                duration = Integer.parseInt(cursor.getString(8));
-                endHour = startHour+duration;
+                //duration = Integer.parseInt(cursor.getString(8));
+                //endHour = startHour+duration;
+                endHour = Integer.parseInt(cursor.getString(7));
+                endMinute = Integer.parseInt(cursor.getString(8));
                 endDay = Integer.parseInt(cursor.getString(2));
 
 
                 //For now please enter duration as an integer. For example for 1 hour just say 1 hour. Do not add minutes or decimals.
-                if (endHour > 24){
+               /* if (endHour > 24){
                     endHour = endHour -24;
                     endDay = endDay+1;
-                }
+                }*/
                 events.add(new WeekViewEvent(Integer.parseInt(cursor.getString(0)), cursor.getString(1),Integer.parseInt(cursor.getString(4)),
                         Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(2)),
                         startHour, startMinute, Integer.parseInt(cursor.getString(4)),
-                        Integer.parseInt(cursor.getString(3)), endDay, endHour, startMinute));
+                        Integer.parseInt(cursor.getString(3)), endDay, endHour, endMinute));
                 i++;
             }while(cursor.moveToNext());
         }

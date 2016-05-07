@@ -18,17 +18,21 @@ public class AddEvent extends AppCompatActivity {
 
     String title;
     String location;
-    String duration;
+   // String durationMinutes;
+   // String durationHours;
     String description;
     Boolean reminder;
     Date date;
     Time time;
+    Date endDate;
+    Time endTime;
     DatabaseEvent db;
 
-    EditText editTitle, editLocation, editDuration, editDescription;
+    EditText editTitle, editLocation, editDescription;
     Switch switchReminder;
     DatePicker datePicker;
     TimePicker timePicker;
+    TimePicker endTimePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +44,18 @@ public class AddEvent extends AppCompatActivity {
 
         editTitle = (EditText)findViewById(R.id.editText_title);
         editLocation = (EditText)findViewById(R.id.editText_location);
-        editDuration = (EditText)findViewById(R.id.editText_duration);
+        //editDuration = (EditText)findViewById(R.id.editText_duration);
         editDescription = (EditText)findViewById(R.id.editText_description);
         datePicker = (DatePicker)findViewById(R.id.datePicker);
         timePicker = (TimePicker)findViewById(R.id.timePicker);
+        endTimePicker = (TimePicker)findViewById(R.id.endTimePicker);
         switchReminder = (Switch)findViewById(R.id.switch_reminder);
 
         Bundle extras = getIntent().getExtras();
         if( extras!=null) {
             editTitle.setText(extras.getString("passTitle"));
             editLocation.setText(extras.getString("passLocation"));
-            editDuration.setText(extras.getString("passDuration"));
+            //editDuration.setText(extras.getString("passDuration"));
             editDescription.setText(extras.getString("passDescription"));
         }
 
@@ -71,11 +76,15 @@ public class AddEvent extends AppCompatActivity {
 
         int valueHour = timePicker.getCurrentHour();
         int valueMinutes = timePicker.getCurrentMinute();
+        int endHour =endTimePicker.getCurrentHour();
+        int endMinutes =endTimePicker.getCurrentMinute();
+
+
 
         Bundle extras = getIntent().getExtras();
 
         if (extras == null) {
-            boolean isInserted = db.insertData(editTitle.getText().toString(), valueDay, valueMonth, valueYear, valueHour, valueMinutes, editLocation.getText().toString(), editDuration.getText().toString(), editDescription.getText().toString());
+            boolean isInserted = db.insertData(editTitle.getText().toString(), valueDay, valueMonth, valueYear, valueHour, valueMinutes, endHour, endMinutes, editLocation.getText().toString(), editDescription.getText().toString());
             if (isInserted == true) {
                 Toast.makeText(AddEvent.this, "Event Scheduled", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, MainActivity.class));
@@ -85,7 +94,7 @@ public class AddEvent extends AppCompatActivity {
 
         if (extras!=null){
             String id = extras.getString("idToEdit");
-            boolean isUpdated = db.updateData(Integer.parseInt(id),editTitle.getText().toString(), valueDay, valueMonth, valueYear, valueHour, valueMinutes, editLocation.getText().toString(), editDuration.getText().toString(), editDescription.getText().toString());
+            boolean isUpdated = db.updateData(Integer.parseInt(id),editTitle.getText().toString(), valueDay, valueMonth, valueYear, valueHour, valueMinutes, endHour, endMinutes, editLocation.getText().toString(), editDescription.getText().toString());
             if (isUpdated == true) {
                 Toast.makeText(AddEvent.this, "Event Updated", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, MainActivity.class));

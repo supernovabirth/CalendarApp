@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class DisplayEvents extends AppCompatActivity {
 
     DatabaseEvent eventDB;
-    EditText title, date, time, location, duration, description, email;
+    EditText title, date, time, location, description, email;
     Button buttonShare;
     String id;
 
@@ -27,7 +27,7 @@ public class DisplayEvents extends AppCompatActivity {
         date = (EditText)findViewById(R.id.editText_display_date);
         time = (EditText)findViewById(R.id.editText_display_time);
         location = (EditText)findViewById(R.id.editText_display_location);
-        duration = (EditText)findViewById(R.id.editText_display_duration);
+        //duration = (EditText)findViewById(R.id.editText_display_duration);
         description = (EditText)findViewById(R.id.editText_display_description);
         email = (EditText)findViewById(R.id.editText_dialog_email);
         buttonShare = (Button)findViewById(R.id.button_share);
@@ -48,9 +48,8 @@ public class DisplayEvents extends AppCompatActivity {
                 title.setText(cursor.getString(1));
                 date.setText(cursor.getString(3)+"/"+cursor.getString(2)+"/"+cursor.getString(4));
                 time.setText(cursor.getString(5)+":"+cursor.getString(6));
-                location.setText(cursor.getString(7));
-                duration.setText(cursor.getString(8));
-                description.setText(cursor.getString(9));
+                location.setText(cursor.getString(9));
+                description.setText(cursor.getString(10));
             }while (cursor.moveToNext());
         }
 
@@ -63,7 +62,7 @@ public class DisplayEvents extends AppCompatActivity {
                              "Date  :"+date.getText().toString()+"\n"+
                              "Time  :"+time.getText().toString()+"\n"+
                              "Location:"+location.getText().toString()+"\n"+
-                             "Duration:"+duration.getText().toString()+"\n"+
+
                              "Description:"+description.getText().toString()+"\n";
 
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
@@ -112,7 +111,7 @@ public class DisplayEvents extends AppCompatActivity {
         edit.putExtra("idToEdit",id);
         edit.putExtra("passTitle", title.getText().toString());
         edit.putExtra("passLocation",location.getText().toString());
-        edit.putExtra("passDuration",duration.getText().toString());
+        //edit.putExtra("passDuration",duration.getText().toString());
         edit.putExtra("passDescription",description.getText().toString());
         startActivity(edit);
     }

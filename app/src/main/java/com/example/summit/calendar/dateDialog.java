@@ -1,5 +1,6 @@
 package com.example.summit.calendar;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -21,7 +22,7 @@ public class dateDialog extends DialogFragment implements DatePickerDialog.OnDat
     {
         txtdate= (EditText)getView();
     }
-
+    @SuppressLint("ValidFragment")
     public dateDialog(View view){
         txtdate=(EditText)view;
     }

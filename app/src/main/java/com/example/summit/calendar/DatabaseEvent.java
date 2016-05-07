@@ -21,9 +21,11 @@ public class DatabaseEvent extends SQLiteOpenHelper {
     public static final String KEY_YEAR = "Year";//4
     public static final String KEY_HOUR = "Hour";//5
     public static final String KEY_MINUTE = "Minute";//6
-    public static final String KEY_LOCATION = "Location";//7
-    public static final String KEY_DURATION = "Duration";//8
-    public static final String KEY_DESCRIPTION = "Description";//9
+    public static final String KEY_ENDHOUR ="EndHour";//7
+    public static final String KEY_ENDMINUTE = "EndMinute";//8
+    public static final String KEY_LOCATION = "Location";//9
+    //public static final String KEY_DURATION = "Duration";//10
+    public static final String KEY_DESCRIPTION = "Description";//10
 
     public DatabaseEvent(Context context){
 
@@ -33,7 +35,7 @@ public class DatabaseEvent extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL(" CREATE TABLE " + TABLE_NAME + "( ID INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT, DAY TEXT, MONTH TEXT, YEAR TEXT, HOUR TEXT, MINUTE TEXT, LOCATION TEXT, DURATION TEXT, DESCRIPTION TEXT );");
+        db.execSQL(" CREATE TABLE " + TABLE_NAME + "( ID INTEGER PRIMARY KEY AUTOINCREMENT, TITLE TEXT, DAY TEXT, MONTH TEXT, YEAR TEXT, HOUR TEXT, MINUTE TEXT, ENDHOUR TEXT, ENDMINUTE TEXT, LOCATION TEXT, DESCRIPTION TEXT );");
 
     }
 
@@ -45,7 +47,7 @@ public class DatabaseEvent extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData( String title, int day, int month, int year, int hour, int minute, String location, String duration, String description)
+    public boolean insertData( String title, int day, int month, int year, int hour, int minute, int endhour, int endminute, String location, String description)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -56,8 +58,10 @@ public class DatabaseEvent extends SQLiteOpenHelper {
         contentValues.put(KEY_YEAR,year);
         contentValues.put(KEY_HOUR,hour);
         contentValues.put(KEY_MINUTE,minute);
+        contentValues.put(KEY_ENDHOUR,endhour);
+        contentValues.put(KEY_ENDMINUTE,endminute);
         contentValues.put(KEY_LOCATION,location);
-        contentValues.put(KEY_DURATION,duration);
+        //contentValues.put(KEY_DURATION,duration);
         contentValues.put(KEY_DESCRIPTION,description);
              //contentValues.put("Reminder",reminder);
 
@@ -68,7 +72,7 @@ public class DatabaseEvent extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean updateData( int id, String title, int day, int month, int year, int hour, int minute, String location, String duration, String description)
+    public boolean updateData( int id, String title, int day, int month, int year, int hour, int minute,  int endhour, int endminute, String location, String description)
     {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -80,8 +84,10 @@ public class DatabaseEvent extends SQLiteOpenHelper {
         contentValues.put(KEY_YEAR,year);
         contentValues.put(KEY_HOUR,hour);
         contentValues.put(KEY_MINUTE,minute);
+        contentValues.put(KEY_ENDHOUR,endhour);
+        contentValues.put(KEY_ENDMINUTE,endminute);
         contentValues.put(KEY_LOCATION,location);
-        contentValues.put(KEY_DURATION,duration);
+        //contentValues.put(KEY_DURATION,duration);
         contentValues.put(KEY_DESCRIPTION,description);
         long result = db.update(TABLE_NAME,contentValues,"ID ="+id,null);
         if (result == -1)
